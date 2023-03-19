@@ -2,12 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer utilities {
   .slider {
     @apply w-[100%] mt-6 appearance-none h-[0.3rem] bg-dark-blue;
   }
   .slider::-webkit-slider-thumb {
-    @apply appearance-none h-[18px] w-[18px] bg-white rounded-full cursor-pointer hover:bg-dark-blue hover:border-2 hover:border-neon-green;
+    @apply appearance-none accent-neon-green h-[18px] w-[18px] bg-white rounded-full cursor-pointer hover:bg-dark-blue hover:border-2 border-neon-green;
   }
   .checkbox {
     @apply w-[0.5rem] h-[0.5rem] border-2 border-white p-[0.4rem] appearance-none relative cursor-pointer;
