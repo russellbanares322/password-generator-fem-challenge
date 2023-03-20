@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
+import { toast } from "react-hot-toast";
 
 const PasswordGenerator = () => {
   const [checkedValue, setCheckedValue] = useState([]);
@@ -84,7 +85,6 @@ const PasswordGenerator = () => {
       setGeneratedText(storedText);
     }
   };
-  console.log(generatedText);
   //* Checkbox value handler
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
@@ -94,6 +94,20 @@ const PasswordGenerator = () => {
       setCheckedValue((prev) => {
         return [...prev.filter((val) => val !== value)];
       });
+    }
+  };
+
+  //* Password generator button
+  const handleCopy = async () => {
+    if (generatedText.length > 0) {
+      try {
+        await navigator.clipboard.writeText(generatedText.join(""));
+        toast.success("Copied to clipboard");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      toast.error("Input text is empty");
     }
   };
   return (
@@ -114,6 +128,7 @@ const PasswordGenerator = () => {
                 ))}
           </p>
           <FaRegCopy
+            onClick={handleCopy}
             className="text-neon-green cursor-pointer hover:text-white transition duration-75"
             size={17}
           />
