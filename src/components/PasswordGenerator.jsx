@@ -8,6 +8,7 @@ const PasswordGenerator = () => {
   const [generatedText, setGeneratedText] = useState([]);
 
   //* Random characters that will be generated
+
   const characters = [
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "abcdefghijklmnopqrstuvwxyz",
@@ -15,25 +16,22 @@ const PasswordGenerator = () => {
     "!@#$%^&*()",
   ];
 
-  //TODO If the checked value array is empty then generate random number but if the length > 0 generate characters depending on the values inside of the array//
+  const uppercaseCharacters = characters[0];
+  const lowercaseCharacters = characters[1];
+  const numbers = characters[2];
+  const symbols = characters[3];
 
-  useEffect(() => {
-    if (rangeValue > 0) {
-      const randomCharacters =
-        characters[Math.floor(Math.random() * characters.length)];
-      const letterIndex = Math.floor(Math.random() * randomCharacters.length);
-      const uppercaseLetters = randomCharacters[letterIndex].substring(
-        0,
-        rangeValue
-      );
+  const allCharacters =
+    characters[Math.floor(Math.random() * characters.length)];
+  const randomCharacters =
+    allCharacters[Math.floor(Math.random() * allCharacters.length)];
+  const randomUppercase =
+    uppercaseCharacters[Math.floor(Math.random() * uppercaseCharacters.length)];
+  const randomLowercase =
+    lowercaseCharacters[Math.floor(Math.random() * lowercaseCharacters.length)];
+  const randomNumbers = numbers[Math.floor(Math.random() * numbers.length)];
+  const randomSymbols = symbols[Math.floor(Math.random() * symbols.length)];
 
-      setGeneratedText([...generatedText, uppercaseLetters]);
-    } else {
-      const storedText = [...generatedText];
-      const removedText = storedText.slice(0, rangeValue);
-      setGeneratedText(removedText);
-    }
-  }, [rangeValue]);
   //* Checkbox options
   const checkboxOptions = [
     {
@@ -63,6 +61,30 @@ const PasswordGenerator = () => {
     setRangeValue(e.target.value);
   };
 
+  const handleRangeInput = (e) => {
+    if (rangeValue < e.target.value) {
+      if (checkedValue.includes("uppercase")) {
+        setGeneratedText([...generatedText, randomUppercase]);
+      }
+      if (checkedValue.includes("lowercase")) {
+        setGeneratedText([...generatedText, randomLowercase]);
+      }
+      if (checkedValue.includes("numbers")) {
+        setGeneratedText([...generatedText, randomNumbers]);
+      }
+      if (checkedValue.includes("symbols")) {
+        setGeneratedText([...generatedText, randomSymbols]);
+      }
+      if (checkedValue.length === 0 || checkedValue.length === 4) {
+        setGeneratedText([...generatedText, randomCharacters]);
+      }
+    } else {
+      const storedText = [...generatedText];
+      storedText.pop();
+      setGeneratedText(storedText);
+    }
+  };
+  console.log(generatedText);
   //* Checkbox value handler
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
@@ -84,10 +106,11 @@ const PasswordGenerator = () => {
           <p className="text-almost-white font-bold text-xl flex items-start justify-start">
             {generatedText.length === 0
               ? "P4$W0rD!"
-              : generatedText.map((text, idx) => (
-                  <p className="text-white" key={idx}>
+              : generatedText.length > 0 &&
+                generatedText.map((text, idx) => (
+                  <span className="text-white" key={idx}>
                     {text}
-                  </p>
+                  </span>
                 ))}
           </p>
           <FaRegCopy
@@ -103,6 +126,7 @@ const PasswordGenerator = () => {
           <input
             min={0}
             max={20}
+            onInput={handleRangeInput}
             onChange={handleRangeChange}
             className="slider"
             type="range"
