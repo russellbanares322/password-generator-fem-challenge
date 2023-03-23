@@ -118,7 +118,7 @@ const PasswordGenerator = () => {
   };
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="my-[5rem] mx-[1.4rem] w-[27rem] md:m-[7rem] md:w-[23rem]">
+      <div className="my-[2rem] mx-[1.4rem] w-[27rem] md:mt-[2rem] md:w-[23rem]">
         <p className="text-almost-white text-lg text-center font-semibold">
           Password Generator
         </p>
