@@ -15,7 +15,7 @@
     @apply w-[0.5rem] h-[0.5rem] border-2 border-white p-[0.4rem] appearance-none relative cursor-pointer transition duration-100 ease-in;
   }
   .checkbox:checked {
-    @apply bg-neon-green border-neon-green before:content-checkIcon before:absolute before:top-[-2.5px] before:left-[0.1px] text-[11px];
+    @apply bg-neon-green border-neon-green before:content-[url('./assets/icon-checkmark.svg')] before:absolute before:top-[-2.7px] before:left-[0.1px] text-[11px];
   }
 }
 

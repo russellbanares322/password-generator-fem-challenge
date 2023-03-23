@@ -11,11 +11,6 @@ module.exports = {
       "light-blue": "#24232B",
       yellow: "#F9CC65",
     },
-    extend: {
-      content: {
-        checkIcon: 'url("./src/assets/icon-checkmark.svg")',
-      },
-    },
   },
   plugins: [],
 };
