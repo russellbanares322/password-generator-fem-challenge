@@ -1,4 +1,4 @@
-export const CheckboxOptions = [
+export const checkboxOptions = [
   {
     type: "checkbox",
     value: "uppercase",
@@ -19,4 +19,11 @@ export const CheckboxOptions = [
     value: "symbols",
     details: "Include Symbols",
   },
+];
+
+export const randomCharacters = [
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "abcdefghijklmnopqrstuvwxyz",
+  "1234567890",
+  "/.!@#$%^&*():'[]{}|?~+=<>",
 ];

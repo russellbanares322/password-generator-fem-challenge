@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { ImArrowRight2 } from "react-icons/im";
 import { toast } from "react-hot-toast";
-import { CheckboxOptions } from "../data/CheckboxOptions";
+import {
+  checkboxOptions,
+  randomCharacters,
+} from "../data/PasswordGeneratorData";
 
 const PasswordGenerator = () => {
   const [checkedValue, setCheckedValue] = useState([]);
@@ -10,13 +13,10 @@ const PasswordGenerator = () => {
   const [generatedPassword, setGeneratedPassword] = useState([]);
 
   //* Random characters that will be generated
-
-  const characters = [
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    "abcdefghijklmnopqrstuvwxyz",
-    "1234567890",
-    "/.!@#$%^&*():'[]{}|?~+=<>",
-  ];
+  const randomUppercase = randomCharacters[0];
+  const randomLowercase = randomCharacters[1];
+  const randomNumbers = randomCharacters[2];
+  const randomSymbols = randomCharacters[3];
 
   //* Range value handler
   const handleRangeChange = (e) => {
@@ -51,34 +51,41 @@ const PasswordGenerator = () => {
 
   //* Password generator button
   const handleGeneratePassword = () => {
-    let uppercase;
-    let lowercase;
-    let numbers;
-    let symbols;
+    let generatedUppercase;
+    let generatedLowercase;
+    let generatedNumbers;
+    let generatedSymbols;
 
     if (checkedValue.length > 0) {
       if (checkedValue.includes("uppercase")) {
-        uppercase = [...Array.from({ length: rangeValue })].map(
-          () => characters[0][Math.floor(Math.random() * characters[0].length)]
+        generatedUppercase = [...Array.from({ length: rangeValue })].map(
+          () =>
+            randomUppercase[Math.floor(Math.random() * randomUppercase.length)]
         );
       }
       if (checkedValue.includes("lowercase")) {
-        lowercase = [...Array.from({ length: rangeValue })].map(
-          () => characters[1][Math.floor(Math.random() * characters[1].length)]
+        generatedLowercase = [...Array.from({ length: rangeValue })].map(
+          () =>
+            randomLowercase[Math.floor(Math.random() * randomLowercase.length)]
         );
       }
       if (checkedValue.includes("numbers")) {
-        numbers = [...Array.from({ length: rangeValue })].map(
-          () => characters[2][Math.floor(Math.random() * characters[2].length)]
+        generatedNumbers = [...Array.from({ length: rangeValue })].map(
+          () => randomNumbers[Math.floor(Math.random() * randomNumbers.length)]
         );
       }
       if (checkedValue.includes("symbols")) {
-        symbols = [...Array.from({ length: rangeValue })].map(
-          () => characters[3][Math.floor(Math.random() * characters[3].length)]
+        generatedSymbols = [...Array.from({ length: rangeValue })].map(
+          () => randomSymbols[Math.floor(Math.random() * randomSymbols.length)]
         );
       }
 
-      const result = [uppercase, lowercase, numbers, symbols];
+      const result = [
+        generatedUppercase,
+        generatedLowercase,
+        generatedNumbers,
+        generatedSymbols,
+      ];
       setGeneratedPassword(
         result
           .flat()
@@ -144,7 +151,7 @@ const PasswordGenerator = () => {
             value={rangeValue}
           />
           <div className="text-white text-sm mt-5">
-            {CheckboxOptions.map((checkbox) => (
+            {checkboxOptions.map((checkbox) => (
               <div
                 className="flex items-center justify-start gap-5 mt-3"
                 key={checkbox.value}
