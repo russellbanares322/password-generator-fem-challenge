@@ -5,10 +5,11 @@
 
 @layer utilities {
   .slider {
-    @apply w-[100%] mt-6 appearance-none h-[0.32rem] bg-dark-blue;
+    @apply w-[100%] mt-6 appearance-none h-[0.32rem] bg-dark-blue relative;
   }
+
   .slider::-webkit-slider-thumb {
-    @apply appearance-none ring-2 ring-white h-[19px] w-[19px] bg-white rounded-full cursor-pointer hover:bg-dark-blue hover:ring-neon-green transition duration-150;
+    @apply appearance-none ring-2 ring-white h-[18px] w-[18px] bg-white rounded-full cursor-pointer hover:bg-dark-blue hover:ring-neon-green transition duration-150;
   }
 
   .checkbox {

@@ -79,6 +79,7 @@ const PasswordGenerator = () => {
           () => randomSymbols[Math.floor(Math.random() * randomSymbols.length)]
         );
       }
+
       const result = [
         generatedUppercase,
         generatedLowercase,
@@ -107,7 +108,7 @@ const PasswordGenerator = () => {
     if (generatedPassword.length > 0) {
       try {
         await navigator.clipboard.writeText(generatedPassword.join(""));
-        toast.success("Copied to clipboard");
+        toast.success("Password copied to clipboard");
       } catch (err) {
         toast.error("Failed to copy, please try again");
       }
@@ -117,7 +118,7 @@ const PasswordGenerator = () => {
   };
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="my-[1rem] mx-[1.4rem] w-[27rem] md:mt-[2rem] md:w-[23rem]">
+      <div className="mt-[0.7rem] mx-[1.4rem] w-[27rem] md:mt-[2rem] md:w-[23rem]">
         <p className="text-almost-white text-lg text-center font-semibold">
           Password Generator
         </p>
